@@ -1,62 +1,27 @@
 #!/usr/bin/env ruby
 
-def decode_char (char)
-  case char
-    when	'.-'	
-      puts 'A'
-    when '-...'
-      puts 'B'	
-    when	'-.-.'	
-      puts 'C'
-    when	'-..'
-      puts 'D'
-    when	'.'	
-      puts 'E'
-    when	'..-'
-      puts 'F'
-    when	'--.'	
-      puts 'G'
-    when	'....'
-      puts 'H'
-    when	'..'	
-      puts 'I'
-    when	'.---'
-      puts 'J'
-    when	'-.-'	
-      puts 'K'
-    when	'.-..'
-      puts 'L'
-    when	'--'	
-      puts 'M'
-    when	'-.'
-      puts 'N'
-    when	'---'
-      puts 'O'
-    when	'.--.'
-      puts 'P'
-    when	'--.-'	
-      puts 'Q'
-    when	'.-.'
-      puts 'R'
-    when	'...'	
-      'S'
-    when	'-'
-      puts 'T'
-    when	'..-'
-      puts 'U'
-    when	'...-'
-      puts 'V'
-    when 	'.--'	
-      puts 'W' 
-    when	'-..-'
-      puts 'X'
-    when	'-.--'	
-      puts 'Y'
-    when	'--..'
-      puts 'Z'
-    else 
-      puts char
-  end
+def decode_char(char)
+  dictionary = {
+    '.-' => 'A', '-...' => 'B', '-.-.' => 'C', '-..' => 'D', '.' => 'E', '..-.' => 'F', '--.' => 'G',
+    '....' => 'H', '..' => 'I', '.---' => 'J', '-.-' => 'K', '.-..' => 'L', '--' => 'M', '-.' => 'N',
+    '---' => 'O', '.--.' => 'P', '--.-' => 'Q', '.-.' => 'R', '...' => 'S', '-' => 'T', '..-' => 'U',
+    '...-' => 'V', '.--' => 'W', '-..-' => 'X', '-.--' => 'Y', '--..' => 'Z', '.----' => '1', '..---' => '2',
+    '...--' => '3', '....-' => '4', '.....' => '5', '-....' => '6', '--...' => '7', '---..' => '8', '----.' => '9',
+    '-----' => '0', '.-.-.-' => '.', '--..--' => ',', '..--..' => '?', '.----.' => "'"
+  }
+  dictionary[char]
 end
 
-decode_char '--..'
+# puts decode_char(".-") #A
+
+def decode_word(code)
+  code.split(' ').map { |char| decode_char(char) }.join
+end
+
+# puts decode_word('-- -.--') #MY
+
+def decode(code)
+  code.split('   ').map { |word| decode_word(word) }.join(' ')
+end
+
+# puts decode('-- -.--   -. .- -- .') #MY NAME
